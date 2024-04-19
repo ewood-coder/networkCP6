@@ -10,9 +10,9 @@ const account = computed(() => AppState.account)
 <template>
 	<div class="about text-center">
 		<div v-if="account">
-			<h1>Welcome {{ account.name }}</h1>
-			<img class="rounded" :src="account.picture" alt="" />
-			<p>{{ account.email }}</p>
+			<h1 class="my-3">Welcome {{ account.name }}</h1>
+			<img class="rounded mb-2" :src="account.picture" alt="" />
+			<p class="mb-4">{{ account.email }}</p>
 			<div class="container">
 				<AccountForm />
 			</div>

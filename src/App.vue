@@ -22,15 +22,21 @@ import Navbar from './components/Navbar.vue'
 
 :root {
 	--main-height: calc(100vh - 32px - 64px);
-	--mainColor: #ffc21a;
+	--bgDarkBlue: #2b2d42;
+	--bgPink: #E86A92;
+	--bgGold: #FFD41C;
+	--bgLightBlue: #2bb6cf;
+	--bgTurquoise: #41e2ba;
+	--bgGreen: #22c122;
+	--bgWhite: #F7F7F9;
 }
 
 .newFont {
 	font-family: "Roboto Mono", monospace;
 }
 
-.mainColor {
-	background-color: var(--mainColor);
+.primaryColor {
+	background-color: var(--bgDarkBlue);
 }
 
 

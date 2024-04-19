@@ -18,11 +18,11 @@ const blogs = computed(() => AppState.blogs)
 
 async function destroyBlog(blogId) {
 	try {
-		const wantsToDestroy = await Pop.confirm("Are you sure you want to delete that blog?")
+		const wantsToDestroy = await Pop.confirm("Are you sure you want to delete that post?")
 
 		if (!wantsToDestroy) return
 
-		logger.log('DESTROYING BLOG ✈️🗑️', blogId)
+		logger.log('DESTROYING POST 🌐🗑️', blogId)
 
 		await blogsService.destroyBlog(blogId)
 	} catch (error) {
@@ -33,29 +33,25 @@ async function destroyBlog(blogId) {
 
 <template>
 
-	<div class="bg-light rounded shadow d-flex flex-wrap justify-content-between brdr">
+	<div class="bgColor text-light rounded shadow d-flex flex-wrap justify-content-between brdr">
 
 		<div class="col-12 col-md-6 col-lg-8">
 			<div class="p-3 w-100">
 				<div class="d-flex gap-3">
-					<img :src=blog.creator.picture alt="picture of creator" class="pfp">
-					<RouterLink :to="{ name: 'Profile', params: { profileId: blog.creatorId } }"
-						class="align-content-center">
 
-						<h4> {{ blog.creator.name }}</h4>
+					<RouterLink :to="{ name: 'Profile', params: { profileId: blog.creatorId } }"
+						class="align-content-center cursor">
+
+						<div class="bgPic">
+							<img :src=blog.creator.picture alt="picture of creator" class="pfp">
+						</div>
 
 					</RouterLink>
+					<h4 class="align-content-center"> {{ blog.creator.name }}</h4>
 				</div>
 
 				<hr />
 
-				<h4 class="fw-bold text-decoration-underline mb-4">{{ blog.title }}</h4>
-
-				<!-- NOTE: This is the css version of the line below it -->
-				<!-- <p class="preview">{{ blog.body }}</p> -->
-
-				<!-- NOTE: This is if you want to shorten the words displayed in the whole text body -->
-				<!-- <p>{{ blog.body.split(' ').slice(0, 30).join(' ') + "..." }}</p> -->
 				<p>{{ blog.body }}</p>
 
 
@@ -69,7 +65,7 @@ async function destroyBlog(blogId) {
 		</div>
 
 		<div class="col-12 col-md-6 col-lg-4 p-2 d-flex">
-			<img :src="blog.imgUrl" :alt="blog.title" class="img-fluid blog-img">
+			<img :src="blog.imgUrl" alt="No image available" class="img-fluid blog-img">
 		</div>
 
 	</div>
@@ -83,9 +79,26 @@ async function destroyBlog(blogId) {
 // 	overflow: hidden;
 // }
 
+.bgPic {
+	border-radius: 9999px;
+	transition: 0.4s ease-in-out;
+}
+
+.bgPic:hover {
+	background-color: var(--bgLightBlue);
+	transition: 0.4s ease-in-out;
+}
+
+.cursor:hover {
+	cursor: pointer;
+}
+
+.bgColor {
+	background-color: var(--bgDarkBlue);
+
+}
 
 .brdr {
-	border: solid black 2px;
 	overflow: hidden;
 }
 

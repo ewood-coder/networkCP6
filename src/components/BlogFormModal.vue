@@ -6,7 +6,6 @@ import { blogsService } from '../services/BlogsService.js';
 import { Modal } from 'bootstrap';
 
 const editableBlogData = ref({
-	title: '',
 	body: '',
 	imgUrl: '',
 })
@@ -20,7 +19,6 @@ async function createBlog() {
 
 		// NOTE form.reset()
 		editableBlogData.value = {
-			title: '',
 			body: '',
 			imgUrl: '',
 		}
@@ -40,7 +38,7 @@ async function createBlog() {
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="blogFormModalLabel">Create a new Blog!</h1>
+					<h1 class="modal-title fs-5" id="blogFormModalLabel">Create a new post!</h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
@@ -49,31 +47,24 @@ async function createBlog() {
 					<form @submit.prevent="createBlog()">
 
 						<div class="form-floating mb-3">
-							<!-- NOTE sets up 2-way-data-binding with a property inside of the ref object -->
-							<input v-model="editableBlogData.title" type="String" class="form-control" id="blogTitle"
-								placeholder="Blog Title" required maxlength="100">
-							<label for="blogTitle">Blog Title</label>
-						</div>
-
-						<div class="form-floating mb-3">
 
 							<textarea v-model="editableBlogData.body" type="String" class="form-control rows" id="blogBody"
-								placeholder="Blog Body/Text" required maxlength="10000">
+								placeholder="Post Body" required maxlength="5000">
 							</textarea>
-
-							<!-- <input v-model="editableBlogData.body" type="String" class="form-control" id="blogBody"
-								placeholder="Blog Body/Text" required maxlength="10000"> -->
-							<label for="blogBody">Blog Body/Text</label>
+							<label for="blogBody">Share whats happening</label>
 						</div>
 
 						<div class="form-floating mb-3">
 							<input v-model="editableBlogData.imgUrl" type="url" class="form-control" id="blogUrl"
-								placeholder="Blog Thumbnail" maxlength="500">
-							<label for="blogUrl">Insert Blog Image Address...</label>
+								placeholder="Blog Thumbnail" maxlength="500" required>
+							<label for="blogUrl">Insert Image Address...</label>
 						</div>
 
 						<div class="text-end">
-							<button class="btn btn-success" type="submit">Submit</button>
+							<button class="fs-4 text-light sendBtn rounded p-2 px-3" type="submit">
+								<div>Post <i class="mdi mdi-send"></i></div>
+
+							</button>
 						</div>
 					</form>
 
@@ -87,6 +78,16 @@ async function createBlog() {
 
 
 <style scoped>
+.sendBtn {
+	background-color: var(--bgLightBlue);
+	border: none;
+	transition: 0.4s;
+}
+
+.sendBtn:hover {
+	background-color: var(--bgGreen);
+}
+
 .rows {
 	min-height: 50vh;
 }

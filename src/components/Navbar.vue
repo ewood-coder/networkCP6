@@ -18,11 +18,11 @@ function toggleTheme() {
 </script>
 
 <template>
-	<nav class="navbar navbar-expand-sm navbar-light bg-warning px-3">
+	<nav class="navbar navbar-expand-sm navbar-dark primaryColor px-3">
 		<router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
 			<div class="d-flex align-items-center">
-				<h1 class="me-3"><i class="mdi mdi-post"></i></h1>
-				<h1>Blogger</h1>
+				<h1 class="me-3 mb-0"><i class="mdi mdi-account-network"></i></h1>
+				<h1 class="newFont2 mb-0">Network</h1>
 			</div>
 		</router-link>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -30,26 +30,32 @@ function toggleTheme() {
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarText">
-			<!-- <ul class="navbar-nav me-auto">
-				<li>
-					<router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
-						About
-					</router-link>
-				</li>
-			</ul> -->
-			<!-- LOGIN COMPONENT HERE -->
-			<div class="ms-auto text-end">
-				<button class="btn text-dark fs-3" @click="toggleTheme"
+
+			<div class="ms-0 ms-md-auto d-flex me-auto me-md-0 text-end">
+				<!-- LOGIN COMPONENT HERE -->
+				<Login class="pe-3 d-flex" />
+
+				<button class="btn text-light fs-3 align-content-center" @click="toggleTheme"
 					:title="`Enable ${theme == 'light' ? 'dark' : 'light'} theme.`">
 					<i class="mdi" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i>
 				</button>
 			</div>
-			<Login />
+
 		</div>
 	</nav>
 </template>
 
 <style scoped>
+@import "/src/assets/fonts/fontSquirrel/stylesheet.css";
+
+.newFont2 {
+
+	/* font-family: "Nabla", system-ui; */
+	/* font-family: "Bungee Spice", sans-serif; */
+	font-family: 'exwayerregular';
+	font-size: 2.2em;
+}
+
 a:hover {
 	text-decoration: none;
 }
