@@ -45,17 +45,60 @@ onMounted(() => {
 		<!-- NOTE v-if keeps the profile from trying to draw, before the network response is back -->
 		<section class="row" v-if="profile">
 			<img class="cover-img" :src="profile.coverImg" alt="">
+
 			<div class="col-12 text-center">
 				<img class="profile-img mt-3" :src="profile.picture" alt="">
-				<h2 class="mt-2">{{ profile.name }}</h2>
+				<h2 class="my-3">{{ profile.name }}</h2>
 			</div>
-			<div class="col-12">
-				<p class="mt-2 text-center">{{ profile.bio }}</p>
+
+			<!-------- CLASS -------->
+			<div class="col-12 col-md-4 d-flex align-items-center justify-content-center">
+				<span v-if="!profile.class"></span>
+
+				<span v-else class="d-flex mt-4 fs-5">
+					<div><u>Class</u>:</div>&nbsp;
+					<div> {{ profile.class }} </div>
+				</span>
 			</div>
-			<!-- <div class="col-12 text-end mb-3">
-				<a v-if="profile.linkedin" :href="profile.linkedin" target="_blank"><i
-						class="mdi mdi-linkedin fs-4"></i></a>
-			</div> -->
+
+			<!-------- GRADUATED -------->
+			<div class="col-12 col-md-4 d-flex align-items-center justify-content-center">
+				<span v-if="profile.graduated == true" class="d-flex mt-4 fs-5">
+					<div><u>Graduated</u>:</div>&nbsp;
+					<span><i class="mdi mdi-check-bold"></i><i class="mdi mdi-school"></i></span>
+				</span>
+
+				<span v-else class="d-flex mt-4 fs-5">
+					<div><u>Graduated</u>:</div>&nbsp;
+					<span><i class="mdi mdi-cancel"></i><i class="mdi mdi-school"></i></span>
+				</span>
+			</div>
+
+			<!-------- SITE LINKS -------->
+			<div class="col-12 col-md-4 gap-2 d-flex align-items-center justify-content-center">
+				<span v-if="!profile.github"></span>
+				<span v-else class="d-flex">
+					<div class="text-center mt-4" v-if="profile.github">
+						<a :href="profile.github" target="_blank"><i class="mdi mdi-github fs-1 link"></i></a>
+					</div>
+				</span>
+
+				<span v-if="!profile.linkedin"></span>
+				<span v-else class="d-flex mt-4">
+					<div class="text-center" v-if="profile.linkedin">
+						<a :href="profile.linkedin" target="_blank"><i class="mdi mdi-linkedin fs-1 link"></i></a>
+					</div>
+				</span>
+			</div>
+
+			<!-------- BIO -------->
+			<div class="col-12 mb-5 d-flex align-items-center justify-content-center">
+				<span v-if="!profile.bio"></span>
+
+				<span v-else class="d-flex">
+					<div class="my-5 text-center">{{ profile.bio }}</div>
+				</span>
+			</div>
 		</section>
 
 		<section class="row justify-content-center">
@@ -81,5 +124,14 @@ onMounted(() => {
 	width: 100px;
 	object-fit: cover;
 	object-position: center;
+}
+
+.link {
+	color: var(--bgLightBlue);
+	transition: 0.4s;
+}
+
+.link:hover {
+	color: var(--bgGreen);
 }
 </style>

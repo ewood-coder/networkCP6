@@ -39,6 +39,10 @@ import Navbar from './components/Navbar.vue'
 	background-color: var(--bgDarkBlue);
 }
 
+.hidden {
+	display: none;
+}
+
 
 // footer {
 // 	display: grid;

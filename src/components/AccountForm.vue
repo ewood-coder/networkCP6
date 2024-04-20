@@ -64,8 +64,8 @@ async function saveAccount() {
 
 			<select v-model="accountData.graduated" class="form-select text-center" aria-label="Default select example">
 				<option selected disabled>Select an Option:</option>
-				<option :value="true">True</option>
-				<option :value="false">False</option>
+				<option :value="true">Yes</option>
+				<option :value="false">No / Not Yet</option>
 			</select>
 		</div>
 
