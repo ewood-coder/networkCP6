@@ -75,4 +75,13 @@ a:hover {
 		height: 64px;
 	}
 }
+
+.bgDarkBlue {
+	background-color: var(--bgDarkBlue);
+}
+
+.sticky-top {
+	position: sticky;
+	top: 0;
+}
 </style>

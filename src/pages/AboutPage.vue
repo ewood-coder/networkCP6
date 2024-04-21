@@ -3,11 +3,9 @@
 </script>
 
 <template>
-  <div class="about">
-    <h1>This is the about page</h1>
-  </div>
+	<div class="about">
+		<h1>Tsk tsk tsk...you shouldn't be here 👁️👁️</h1>
+	</div>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

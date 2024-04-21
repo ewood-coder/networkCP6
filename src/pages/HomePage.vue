@@ -1,10 +1,10 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue';
 import Pop from '../utils/Pop.js';
-import { blogsService } from '../services/BlogsService.js';
 import { AppState } from '../AppState.js';
-import BlogCard from '../components/BlogCard.vue';
-import BlogFormModal from '../components/BlogFormModal.vue';
+import { postsService } from '../services/PostsService.js';
+import PostCard from '../components/PostCard.vue';
+import PostFormModal from '../components/PostFormModal.vue';
 import { loadState, saveState } from '../utils/Store.js';
 import { profilesService } from '../services/ProfilesService.js';
 import ProfilePage from './ProfilePage.vue';
@@ -12,11 +12,11 @@ import ProfilePage from './ProfilePage.vue';
 
 const profile = computed(() => AppState.activeProfile)
 const account = computed(() => AppState.account)
-const blogs = computed(() => AppState.blogs)
+const posts = computed(() => AppState.posts)
 
-async function getBlogs() {
+async function getPosts() {
 	try {
-		await blogsService.getBlogs()
+		await postsService.getPosts()
 	}
 	catch (error) {
 		Pop.error(error);
@@ -25,7 +25,7 @@ async function getBlogs() {
 
 
 onMounted(() => {
-	getBlogs()
+	getPosts()
 })
 
 </script>
@@ -38,8 +38,8 @@ onMounted(() => {
 				<div class="col-12 mt-3 d-flex align-items-center gap-4">
 					<h2>Create Post: </h2>
 					<!-- NOTE v-if="account != null" if the user is logged in, show the button -->
-					<button v-if="account" class="fs-3 text-light sendBtn rounded px-2" title="Create a new post!"
-						data-bs-toggle="modal" data-bs-target="#blogFormModal">
+					<button v-if="account != null" class="fs-3 text-light sendBtn rounded px-2" title="Create a new post!"
+						data-bs-toggle="modal" data-bs-target="#postFormModal">
 
 						<i class="mdi mdi-plus"></i>
 					</button>
@@ -50,10 +50,10 @@ onMounted(() => {
 
 			<section class="row">
 				<h1 class="mb-4 text-center">Posts:</h1>
-				<div v-for="blog in blogs" :key="blog.id" class="col-12 mb-5">
-					<BlogCard :blog="blog" />
+				<div v-for="post in posts" :key="post.id" class="col-12 mb-5">
+					<PostCard :post="post" />
 				</div>
-				<BlogFormModal />
+				<PostFormModal />
 			</section>
 		</section>
 

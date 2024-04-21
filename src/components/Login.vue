@@ -29,7 +29,8 @@ async function logout() {
 					</div>
 				</div>
 				<!-- NOTE dropdown list after logged on -->
-				<div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0" aria-labelledby="authDropdown">
+				<div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0 zIndex"
+					aria-labelledby="authDropdown">
 					<div class="list-group">
 						<router-link :to="{ name: 'Account' }">
 							<div class="list-group-item dropdown-item list-group-item-action">
@@ -53,4 +54,8 @@ async function logout() {
 	</span>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.zIndex {
+	z-index: 1021;
+}
+</style>

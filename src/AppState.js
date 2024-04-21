@@ -1,5 +1,5 @@
 import { reactive } from 'vue'
-import { Blog } from './models/Blog.js'
+import { Post } from './models/Post.js'
 import { Profile } from './models/Profile.js'
 
 
@@ -11,12 +11,14 @@ export const AppState = reactive({
 	/** @type {import('./models/Account.js').Account} user info from the database*/
 	account: null,
 
-	/** @type {Blog[]} */
-	blogs: [],
+	/** @type {Post[]} */
+	posts: [],
+	currentPage: 1,
+	totalPages: Infinity,
 
 	/** @type {Profile} */
 	activeProfile: null,
 
-	/** @type {Blog[]} */
-	profileBlogs: []
+	/** @type {Post[]} */
+	profilePosts: [],
 })

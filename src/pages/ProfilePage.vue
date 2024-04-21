@@ -3,14 +3,14 @@ import { useRoute } from 'vue-router';
 import Pop from '../utils/Pop.js';
 import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
-import BlogCard from '../components/BlogCard.vue';
-import { blogsService } from '../services/BlogsService.js';
+import PostCard from '../components/PostCard.vue';
+import { postsService } from '../services/PostsService.js';
 import { profilesService } from '../services/ProfilesService.js';
 
 
 
 const profile = computed(() => AppState.activeProfile)
-const blogs = computed(() => AppState.profileBlogs)
+const posts = computed(() => AppState.profilePosts)
 
 const route = useRoute()
 
@@ -23,18 +23,18 @@ async function getProfile() {
 	}
 }
 
-async function getProfileBlogs() {
+async function getProfilePosts() {
 	try {
-		await blogsService.getProfileBlogs(route.params.profileId)
+		await postsService.getProfilePosts(route.params.profileId)
 	} catch (error) {
-		Pop.toast("Could not get profile blogs", 'error')
+		Pop.toast("Could not get profile posts", 'error')
 		console.error(error)
 	}
 }
 
 onMounted(() => {
 	getProfile()
-	getProfileBlogs()
+	getProfilePosts()
 })
 
 </script>
@@ -102,8 +102,8 @@ onMounted(() => {
 		</section>
 
 		<section class="row justify-content-center">
-			<div v-for="blog in blogs" :key="blog.id" class="col-10 mb-2">
-				<BlogCard :blog="blog" />
+			<div v-for="post in posts" :key="post.id" class="col-10 mb-2">
+				<PostCard :post="post" />
 			</div>
 		</section>
 	</div>
