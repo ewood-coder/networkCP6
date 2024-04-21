@@ -38,8 +38,8 @@ const localeFunc = (number, index, totalSec) => {
 		['%ss', 'in %s seconds'],
 		['1 min', 'in 1 minute'],
 		['%s min', 'in %s minutes'],
-		['1hr', 'in 1 hour'],
-		['%shr', 'in %s hours'],
+		['1h', 'in 1 hour'],
+		['%sh', 'in %s hours'],
 		['1d', 'in 1 day'],
 		['%sd', 'in %s days'],
 		['1wk', 'in 1 week'],
@@ -95,19 +95,16 @@ register('my-locale', localeFunc);
 				</div>
 			</div>
 
-			<div class="container my-0 py-0">
-				<hr />
-			</div>
-
-			<div class="p-1 p-md-3 w-100 d-flex">
-				<p class="mb-2 mb-md-4 p-3 p-md-0">{{ post.body }}</p>
+			<div class="px-3 px-md-4 my-1 mt-3 mt-md-0 my-md-1 w-100 d-flex">
+				<p class="word-break">{{ post.body }}</p>
 			</div>
 
 		</div>
 
-		<div class="col-12">
-			<img :src="post.imgUrl" alt="No image available" class="img-fluid post-img">
+		<div class="col-12 text-center" v-if="post.imgUrl">
+			<img :src="post.imgUrl" alt="" class="img-fluid post-img my-3">
 		</div>
+		<div class="col-12" v-else></div>
 
 		<div class=" d-flex justify-content-end align-items-center px-3">
 			<div v-if="post.creatorId == account?.id" class="d-flex">
@@ -130,6 +127,10 @@ register('my-locale', localeFunc);
 </template>
 
 <style scoped lang="scss">
+.word-break {
+	overflow-wrap: anywhere;
+}
+
 .btnLike {
 	color: white;
 	background-color: #3f4161;
@@ -187,10 +188,18 @@ register('my-locale', localeFunc);
 }
 
 .post-img {
-	width: 100%;
+	width: 50%;
 	height: auto;
+	// max-width: 20em;
 	// max-height: 20em;
-	object-fit: cover;
+	// object-fit: cover;
+}
+
+@media only screen and (max-width: 767px) {
+	.post-img {
+		width: 100%;
+		height: auto;
+	}
 }
 
 .responsive {

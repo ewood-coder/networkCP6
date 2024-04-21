@@ -41,72 +41,80 @@ onMounted(() => {
 
 
 <template>
-	<div class="container mt-2">
-		<!-- NOTE v-if keeps the profile from trying to draw, before the network response is back -->
-		<section class="row" v-if="profile">
-			<img class="cover-img" :src="profile.coverImg" alt="">
 
-			<div class="col-12 text-center">
-				<img class="profile-img mt-3" :src="profile.picture" alt="">
-				<h2 class="my-3">{{ profile.name }}</h2>
-			</div>
+	<header class="sticky-top mt-0 pt-0">
+		<SearchBar />
+	</header>
 
-			<!-------- CLASS -------->
-			<div class="col-12 col-md-4 d-flex align-items-center justify-content-center">
-				<span v-if="!profile.class"></span>
+	<main>
+		<div class="container mt-2">
+			<!-- NOTE v-if keeps the profile from trying to draw, before the network response is back -->
+			<section class="row" v-if="profile">
+				<img class="cover-img" :src="profile.coverImg" alt="">
 
-				<span v-else class="d-flex mt-4 fs-5">
-					<div><u>Class</u>:</div>&nbsp;
-					<div> {{ profile.class }} </div>
-				</span>
-			</div>
+				<div class="col-12 text-center">
+					<img class="profile-img mt-3" :src="profile.picture" alt="">
+					<h2 class="my-3">{{ profile.name }}</h2>
+				</div>
 
-			<!-------- GRADUATED -------->
-			<div class="col-12 col-md-4 d-flex align-items-center justify-content-center">
-				<span v-if="profile.graduated == true" class="d-flex mt-4 fs-5">
-					<div><u>Graduated</u>:</div>&nbsp;
-					<span><i class="mdi mdi-check-bold"></i><i class="mdi mdi-school"></i></span>
-				</span>
+				<!-------- CLASS -------->
+				<div class="col-12 col-md-4 d-flex align-items-center justify-content-center">
+					<span v-if="!profile.class"></span>
 
-				<span v-else class="d-flex mt-4 fs-5">
-					<div><u>Graduated</u>:</div>&nbsp;
-					<span><i class="mdi mdi-cancel"></i><i class="mdi mdi-school"></i></span>
-				</span>
-			</div>
+					<span v-else class="d-flex mt-4 fs-5">
+						<div><u>Class</u>:</div>&nbsp;
+						<div> {{ profile.class }} </div>
+					</span>
+				</div>
 
-			<!-------- SITE LINKS -------->
-			<div class="col-12 col-md-4 gap-2 d-flex align-items-center justify-content-center">
-				<span v-if="!profile.github"></span>
-				<span v-else class="d-flex">
-					<div class="text-center mt-4" v-if="profile.github">
-						<a :href="profile.github" target="_blank"><i class="mdi mdi-github fs-1 link"></i></a>
-					</div>
-				</span>
+				<!-------- GRADUATED -------->
+				<div class="col-12 col-md-4 d-flex align-items-center justify-content-center">
+					<span v-if="profile.graduated == true" class="d-flex mt-4 fs-5">
+						<div><u>Graduated</u>:</div>&nbsp;
+						<span><i class="mdi mdi-check-bold"></i><i class="mdi mdi-school"></i></span>
+					</span>
 
-				<span v-if="!profile.linkedin"></span>
-				<span v-else class="d-flex mt-4">
-					<div class="text-center" v-if="profile.linkedin">
-						<a :href="profile.linkedin" target="_blank"><i class="mdi mdi-linkedin fs-1 link"></i></a>
-					</div>
-				</span>
-			</div>
+					<span v-else class="d-flex mt-4 fs-5">
+						<div><u>Graduated</u>:</div>&nbsp;
+						<span><i class="mdi mdi-cancel"></i><i class="mdi mdi-school"></i></span>
+					</span>
+				</div>
 
-			<!-------- BIO -------->
-			<div class="col-12 mb-5 d-flex align-items-center justify-content-center">
-				<span v-if="!profile.bio"></span>
+				<!-------- SITE LINKS -------->
+				<div class="col-12 col-md-4 gap-2 d-flex align-items-center justify-content-center">
+					<span v-if="!profile.github"></span>
+					<span v-else class="d-flex">
+						<div class="text-center mt-4" v-if="profile.github">
+							<a :href="profile.github" target="_blank"><i class="mdi mdi-github fs-1 link"></i></a>
+						</div>
+					</span>
 
-				<span v-else class="d-flex">
-					<div class="my-5 text-center">{{ profile.bio }}</div>
-				</span>
-			</div>
-		</section>
+					<span v-if="!profile.linkedin"></span>
+					<span v-else class="d-flex mt-4">
+						<div class="text-center" v-if="profile.linkedin">
+							<a :href="profile.linkedin" target="_blank"><i class="mdi mdi-linkedin fs-1 link"></i></a>
+						</div>
+					</span>
+				</div>
 
-		<section class="row justify-content-center">
-			<div v-for="post in posts" :key="post.id" class="col-10 mb-2">
-				<PostCard :post="post" />
-			</div>
-		</section>
-	</div>
+				<!-------- BIO -------->
+				<div class="col-12 mb-5 d-flex align-items-center justify-content-center">
+					<span v-if="!profile.bio"></span>
+
+					<span v-else class="d-flex">
+						<div class="my-5 text-center">{{ profile.bio }}</div>
+					</span>
+				</div>
+			</section>
+
+			<section class="row justify-content-center">
+				<div v-for="post in posts" :key="post.id" class="col-10 mb-2">
+					<PostCard :post="post" />
+				</div>
+			</section>
+		</div>
+	</main>
+
 </template>
 
 

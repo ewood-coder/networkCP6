@@ -56,7 +56,7 @@ async function createPost() {
 
 						<div class="form-floating mb-3">
 							<input v-model="editablePostData.imgUrl" type="url" class="form-control" id="postUrl"
-								placeholder="Post Thumbnail" maxlength="500" required>
+								placeholder="Post Thumbnail" maxlength="500">
 							<label for="postUrl">Insert Image Address...</label>
 						</div>
 

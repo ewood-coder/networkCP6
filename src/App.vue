@@ -11,9 +11,6 @@ import SearchBar from './components/SearchBar.vue'
 	<header class="newFont">
 		<Navbar />
 	</header>
-	<header class="sticky-top mt-0 pt-0">
-		<SearchBar />
-	</header>
 	<main class="newFont">
 		<router-view />
 	</main>
@@ -35,6 +32,7 @@ hr {
 	--bgTurquoise: #41e2ba;
 	--bgGreen: #22c122;
 	--bgGray: #868686;
+	--bgRed: #da0000;
 }
 
 .newFont {

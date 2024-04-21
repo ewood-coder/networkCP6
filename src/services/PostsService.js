@@ -35,15 +35,14 @@ class PostsService {
 		const response = await api.get('api/posts')
 		// NOTE logger is similar to console, will not break your application during deployment
 		logger.log('GOT POSTS 🌐', response.data);
-
-		AppState.posts = response.data.map(pojo => new Post(pojo))
+		AppState.posts = response.data.posts.map(pojo => new Post(pojo))
 	}
 
 	async getProfilePosts(profileId) {
 		AppState.profilePosts = []
-		const response = await api.get(`api/posts?creatorId=${profileId}`)
+		const response = await api.get(`api/profiles/${profileId}/posts`)
 		console.log('👩‍💻📥', response.data)
-		const posts = response.data.map(post => new Post(post))
+		const posts = response.data.posts.map(post => new Post(post))
 
 		AppState.profilePosts = posts
 	}
