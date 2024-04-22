@@ -10,10 +10,25 @@ import { profilesService } from '../services/ProfilesService.js';
 
 
 
-defineProps({ post: { type: Post, required: true } })
+
+const isLiked = computed(() => {
+	return props.post.likeIds.find(p => p == AppState.account?.id)
+})
+
+function likePost() {
+	try {
+		postsService.likePost(props.post)
+	}
+	catch (error) {
+		Pop.toast('Could not like post', 'error');
+	}
+}
+// -------------------------------------------------------------------
+const props = defineProps({ post: { type: Post, required: true } })
+console.log(props.post)
 
 const account = computed(() => AppState.account)
-const posts = computed(() => AppState.posts)
+
 
 async function destroyPost(postId) {
 	try {
@@ -55,7 +70,6 @@ register('my-locale', localeFunc);
 </script>
 
 <template>
-
 	<div class="bgColor text-light rounded shadow brdr">
 
 		<div class="col-12">
@@ -72,9 +86,10 @@ register('my-locale', localeFunc);
 
 
 				<div class="pt-3 ps-3 w-100">
-					<h4> {{ post.creator.name }}</h4>
+					<h4 class="mb-0"> {{ post.creator.name }}</h4>
 
-					<div class="d-flex">
+
+					<div class="mt-2 d-flex">
 						{{ format(post.createdAt.getTime(), 'my-locale') }}
 
 						<div v-if="post.creator.graduated == true" class="ps-4">
@@ -102,23 +117,35 @@ register('my-locale', localeFunc);
 		</div>
 
 		<div class="col-12 text-center" v-if="post.imgUrl">
-			<img :src="post.imgUrl" alt="" class="img-fluid post-img my-3">
+			<img :src="post.imgUrl" alt="" class="img-fluid post-img mt-3">
 		</div>
 		<div class="col-12" v-else></div>
 
 		<div class=" d-flex justify-content-end align-items-center px-3">
-			<div v-if="post.creatorId == account?.id" class="d-flex">
-				<i class="mdi mdi-heart-off-outline px-2 fs-1 btnLikeOff py-1" title="Can't like your own posts"></i>
+			<div v-if="!account?.id" class="d-flex gap-1">
+				<i class="mdi mdi-heart-off-outline px-2 fs-1 btnLikeOff py-1" title="Login Required"></i>
 
-				<div class="d-flex align-items-center mx-1 fs-5" title="Like Count">22</div>
+				<div class="d-flex align-items-center mx-1 fs-5" title="Like Count">{{ post.likeIds.length }}</div>
 			</div>
-			<!-- =-------------------------------------------------------------------------- -->
-			<div v-if="post.creatorId !== account?.id" class="d-flex">
-				<button @click="likePost(post.id)" class="btnLike py-1" :title="`Like Post`">
-					<i class="mdi mdi-heart px-1 fs-1"></i>
-				</button>
 
-				<div class="d-flex align-items-center mx-1 fs-5" title="Like Count">22</div>
+			<div v-else>
+				<div v-if="post.creatorId == account?.id" class="d-flex">
+					<i class="mdi mdi-heart-off-outline px-2 fs-1 btnLikeOff py-1" title="Can't like your own posts"></i>
+
+					<div class="d-flex align-items-center mx-1 fs-5" title="Like Count">{{ post.likeIds.length }}</div>
+				</div>
+				<!-- --------------------------------------------------------------------------- -->
+				<div v-else class="d-flex">
+					<button v-if="!isLiked" @click="likePost()" class="btnLike py-1" :title="`Like Post`">
+						<i class="mdi mdi-heart-outline px-1 fs-1"></i>
+					</button>
+
+					<button v-if="isLiked" @click="likePost()" class="btnAlreadyLiked py-1" :title="`Unlike Post`">
+						<i class="mdi mdi-heart px-1 fs-1"></i>
+					</button>
+
+					<div class="d-flex align-items-center mx-1 fs-5" title="Like Count">{{ post.likeIds.length }}</div>
+				</div>
 			</div>
 		</div>
 
@@ -137,10 +164,10 @@ register('my-locale', localeFunc);
 	border: none;
 }
 
-.btnLike:active {
+.btnAlreadyLiked {
 	color: #e44b7e;
+	background-color: #3f4161;
 	border: none;
-
 }
 
 .btnLikeOff {
@@ -199,6 +226,10 @@ register('my-locale', localeFunc);
 	.post-img {
 		width: 100%;
 		height: auto;
+	}
+
+	.w100 {
+		width: 100%;
 	}
 }
 

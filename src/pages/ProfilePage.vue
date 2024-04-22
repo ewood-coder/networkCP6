@@ -33,6 +33,8 @@ async function getProfilePosts() {
 }
 
 onMounted(() => {
+	AppState.useProfile = true
+	AppState.currentPage = 1
 	getProfile()
 	getProfilePosts()
 })
@@ -98,7 +100,7 @@ onMounted(() => {
 				</div>
 
 				<!-------- BIO -------->
-				<div class="col-12 mb-5 d-flex align-items-center justify-content-center">
+				<div class="col-12 mb-3 mb-md-5 d-flex align-items-center justify-content-center">
 					<span v-if="!profile.bio"></span>
 
 					<span v-else class="d-flex">
@@ -106,13 +108,17 @@ onMounted(() => {
 					</span>
 				</div>
 			</section>
-
-			<section class="row justify-content-center">
-				<div v-for="post in posts" :key="post.id" class="col-10 mb-2">
-					<PostCard :post="post" />
-				</div>
-			</section>
 		</div>
+
+		<section class="row justify-content-center">
+
+			<h1 class="mb-4 text-center">Posts:</h1>
+
+			<div v-for="post in posts" :key="post.id" class="col-10 mb-5">
+				<PostCard :post="post" />
+			</div>
+		</section>
+
 	</main>
 
 </template>

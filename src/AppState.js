@@ -1,6 +1,7 @@
 import { reactive } from 'vue'
 import { Post } from './models/Post.js'
 import { Profile } from './models/Profile.js'
+import { Picture } from './models/Picture.js'
 
 
 
@@ -19,6 +20,13 @@ export const AppState = reactive({
 	/** @type {Profile} */
 	activeProfile: null,
 
+	/** @type {Profile[]} */
+	profiles: null,
+
 	/** @type {Post[]} */
 	profilePosts: [],
+	useProfile: false,
+
+	/** @type {Picture[]} */
+	pictures: [],
 })
