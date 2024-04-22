@@ -104,7 +104,7 @@ onMounted(() => {
 					<span v-if="!profile.bio"></span>
 
 					<span v-else class="d-flex">
-						<div class="my-5 text-center">{{ profile.bio }}</div>
+						<div class="my-5 px-3 text-center">{{ profile.bio }}</div>
 					</span>
 				</div>
 			</section>
